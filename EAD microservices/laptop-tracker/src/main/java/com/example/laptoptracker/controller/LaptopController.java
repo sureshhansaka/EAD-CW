@@ -36,12 +36,6 @@ public class LaptopController {
 
     @PutMapping(path = "/laptops")
     public Laptop editLaptop(@RequestBody Laptop laptop){
-
-        laptop.setId(laptopService.getLaptopByLapCode(laptop.getLaptopCode()).getId());
-        laptop.setBrand(laptopService.getLaptopByLapCode(laptop.getLaptopCode()).getBrand());
-        laptop.setHddType(laptopService.getLaptopByLapCode(laptop.getLaptopCode()).getHddType());
-        laptop.setTotalSpace(laptopService.getLaptopByLapCode(laptop.getLaptopCode()).getTotalSpace());
-        laptop.setRamSize(laptopService.getLaptopByLapCode(laptop.getLaptopCode()).getRamSize());
         return laptopService.updateLaptop(laptop);
     }
 
