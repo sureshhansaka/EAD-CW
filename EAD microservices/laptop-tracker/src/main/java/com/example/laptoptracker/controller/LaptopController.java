@@ -60,4 +60,8 @@ public class LaptopController {
         return laptopService.getLaptopByLapCode(lapCode);
     }
 
+    @PutMapping(path = "/laptops" , params = "lapCode")
+    public Laptop updateLaptopStatusByLapCode (String lapCode, @RequestBody int status){
+        return laptopService.updateLaptopStatusByLapCode(lapCode,status);
+    }
 }

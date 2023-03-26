@@ -45,6 +45,10 @@ public class Laptop {
         this.status = status;
     }
 
+    public Laptop(int status) {
+        this.status = status;
+    }
+
     public int getId() {
         return id;
     }
