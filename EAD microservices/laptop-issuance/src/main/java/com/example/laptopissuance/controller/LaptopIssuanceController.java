@@ -5,6 +5,8 @@ import com.example.laptopissuance.service.LaptopIssuanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -22,12 +24,15 @@ public class LaptopIssuanceController {
     }
 
     @GetMapping(path = "/allocations")
-    public List<LaptopIssuance> getAllLaptopIssued(){
-        return laptopIssuanceService.getAllLaptopIssued();
+    public List<LaptopIssuance> getUnreturnedAllocations(){
+        return laptopIssuanceService.getUnreturnedAllocations();
     }
 
+
     @PutMapping(path = "/allocations")
-    public LaptopIssuance updateLaptopReturn(@RequestBody LaptopIssuance laptopIssuance){
+    public LaptopIssuance updateLaptopStatusByLapCode(@RequestBody LaptopIssuance laptopIssuance){
+        laptopIssuance.setIssueId(laptopIssuanceService.getLaptopIssuanceByLapCode(laptopIssuance.getLaptopCode()).getIssueId());
+        laptopIssuance.setIssuedTo(laptopIssuanceService.getLaptopIssuanceByLapCode(laptopIssuance.getLaptopCode()).getIssuedTo());
         return laptopIssuanceService.updateLaptopReturn(laptopIssuance);
     }
 

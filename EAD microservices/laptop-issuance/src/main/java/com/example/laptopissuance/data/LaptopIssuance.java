@@ -38,6 +38,16 @@ public class LaptopIssuance {
         this.issuedTo = issuedTo;
     }
 
+    public LaptopIssuance(String returnedDateTime) {
+        this.returnedDateTime = returnedDateTime;
+    }
+
+    public LaptopIssuance(String laptopCode, String issuedDateTime, String returnedDateTime) {
+        this.laptopCode = laptopCode;
+        this.issuedDateTime = issuedDateTime;
+        this.returnedDateTime = returnedDateTime;
+    }
+
     public int getIssueId() {
         return issueId;
     }

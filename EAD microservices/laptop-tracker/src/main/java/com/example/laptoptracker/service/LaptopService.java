@@ -45,7 +45,7 @@ public class LaptopService {
         return laptopRepository.findLaptopByLapCode(lapCode);
     }
 
-    public Laptop updateLaptopStatusByLapCode (String lapCode, int status){
-        return laptopRepository.updateLaptopStatusByLapCode(lapCode,status);
+    public Laptop updateLaptopStatusByLapCode (String laptopCode, int status){
+        return laptopRepository.updateLaptopStatusByLapCode(status,laptopCode);
     }
 }

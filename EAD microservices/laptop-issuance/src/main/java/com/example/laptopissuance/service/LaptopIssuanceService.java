@@ -5,6 +5,7 @@ import com.example.laptopissuance.data.LaptopIssuanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,12 +22,16 @@ public class LaptopIssuanceService {
         return laptopIssuanceRepository.save(laptopIssuance);
     }
 
-    public List<LaptopIssuance> getAllLaptopIssued(){
-        return laptopIssuanceRepository.findAll();
+    public List<LaptopIssuance> getUnreturnedAllocations(){
+        return laptopIssuanceRepository.getUnreturnedAllocations();
     }
 
     public LaptopIssuance updateLaptopReturn(LaptopIssuance laptopIssuance){
         return laptopIssuanceRepository.save(laptopIssuance);
+    }
+
+    public LaptopIssuance getLaptopIssuanceByLapCode(String laptopCode){
+        return laptopIssuanceRepository.getLaptopIssuanceByLapCode(laptopCode);
     }
 }
 
