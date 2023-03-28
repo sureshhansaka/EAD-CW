@@ -18,7 +18,7 @@ public class EmployeeController {
         return employeeService.getAllEmployee();
     }
 
-    @PostMapping(path = "/emp")
+    @PostMapping(path = "/employees")
     public Employee createEmployee(@RequestBody Employee employee){
         return employeeService.createEmployee(employee);
     }
