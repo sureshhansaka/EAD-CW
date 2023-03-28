@@ -4,7 +4,7 @@ import { Routes, Route, Outlet } from 'react-router-dom';
 import './App.css';
 import { AllocateLaptop } from './components/AllocateLaptop';
 import Employee from './components/Employee';
-import LaptopList  from './components/LaptopList.js';
+import LaptopList  from './components/LaptopList';
 import { Login } from './components/Login';
 import Menu from './components/Menu';
 import AddLaptop from './components/AddLaptop'
@@ -22,7 +22,9 @@ function App() {
       <Routes>
         <Route element={<MenuLayout/>}>
           <Route path='laptopList' element={<LaptopList/>} />
-          <Route path='createlaptop' element={<AddLaptop/>} />
+
+          <Route path='addlaptop' element={<AddLaptop/>} />
+
           <Route path='allocatelaptop' element={<AllocateLaptop/>} />
         </Route>
         <Route path='register' element={<Employee/>} />
