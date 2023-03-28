@@ -58,7 +58,7 @@ export default function Employee() {
         onChange={(e)=>setPassword(e.target.value)}/>
         <br/>
 
-        <Button variant="contained" onClick={() => navigate('login')}>Register</Button>
+        <Button variant="contained" onClick={() => navigate('/')}>Register</Button>
         <br/>
         <Link to={'/'} component={<Login/>} >Already have an account? Login</Link>
 
