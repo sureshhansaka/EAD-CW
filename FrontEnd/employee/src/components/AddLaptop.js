@@ -21,7 +21,7 @@ export default function Login() {
 
     const handleClick=(e)=>{
         e.preventDefault()
-        const Employee={lapcode,brand,hddType,totalSpace,ramSize}
+        const Laptop={laptopCode,brand,hddType,totalSpace,ramSize}
         console.log(Laptop)
        fetch("http://localhost:8080/laptops",{
         method:"POST",
@@ -63,9 +63,12 @@ export default function Login() {
           <MenuItem value={1}>PCLAB01</MenuItem>
           <MenuItem value={2}>PCLAB02</MenuItem>
           <MenuItem value={3}>PCLAB03</MenuItem>
+          <MenuItem value={4}>PCLAB04</MenuItem>
+          <MenuItem value={5}>PCLAB05</MenuItem>
+          <MenuItem value={6}>HALL-16A</MenuItem>
         </Select>
         </FormControl>
-        <TextField id="outlined-basic" label="Laptop Code" variant="outlined" fullWidth/>
+        <TextField id="outlined-basic" label="Laptop Code" variant="outlined" fullWidth onChange={(e) => setLaptopCode(e.target.value)}/>
         <br/>
         <TextField id="outlined-basic" label="Brand" variant="outlined" fullWidth value={brand} 
         onChange={(e)=>setBrand(e.target.value)}/>
