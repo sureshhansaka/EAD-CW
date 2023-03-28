@@ -37,8 +37,12 @@ public class LaptopService {
         laptopRepository.deleteById(id);
     }
 
-    public List<Laptop> getAllLaptopsByLab(String labName){
-        return laptopRepository.findLaptopsByLabName(labName);
+    public List<Laptop> getAllAvailableLaptopsByLabName(String labName){
+        return laptopRepository.findAvailableLaptopByLabName(labName);
+    }
+
+    public List<Laptop> getAllLaptopsByLabName(String labName){
+        return laptopRepository.findLaptopByLabName(labName);
     }
 
     public Laptop getLaptopByLapCode(String lapCode){

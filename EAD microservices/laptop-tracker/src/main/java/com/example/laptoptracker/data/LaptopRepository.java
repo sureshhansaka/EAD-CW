@@ -10,7 +10,11 @@ import java.util.List;
 public interface LaptopRepository extends JpaRepository<Laptop,Integer> {
 
     @Query ("Select l from Laptop l where l.laptopCode like ?1% AND l.status =1")
-    List<Laptop> findLaptopsByLabName(String Lab);
+    List<Laptop> findAvailableLaptopByLabName(String Lab);
+
+    @Query ("Select l from Laptop l where l.laptopCode like ?1%")
+    List<Laptop> findLaptopByLabName(String Lab);
+
 
     @Query("Select l from Laptop l where l.laptopCode = ?1")
     Laptop findLaptopByLapCode(String lapCode);

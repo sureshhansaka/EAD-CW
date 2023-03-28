@@ -49,9 +49,14 @@ public class LaptopController {
         laptopService.deleteLaptopById(id);
     }
 
+    @GetMapping(path = "/laptops/available", params = "labName")
+    public List<Laptop> getAllAvailableLaptopsByLabName(String labName){
+        return  laptopService.getAllAvailableLaptopsByLabName(labName);
+    }
+
     @GetMapping(path = "/laptops", params = "labName")
-    public List<Laptop> getAllLaptopsByLabName( String labName){
-        return  laptopService.getAllLaptopsByLab(labName);
+    public List<Laptop> getAllLaptopsByLabName(String labName){
+        return laptopService.getAllLaptopsByLabName(labName);
     }
 
     @GetMapping(path = "/laptops", params = "lapCode")
