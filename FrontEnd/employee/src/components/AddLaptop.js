@@ -21,7 +21,7 @@ export default function Login() {
 
     const handleClick=(e)=>{
         e.preventDefault()
-        const Employee={lapcode,brand,hddType,totalSpace,ramSize}
+        const Laptop={laptopCode,brand,hddType,totalSpace,ramSize}
         console.log(Laptop)
        fetch("http://localhost:8080/laptops",{
         method:"POST",
