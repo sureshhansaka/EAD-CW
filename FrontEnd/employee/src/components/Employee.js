@@ -3,8 +3,11 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Container } from '@mui/system';
 import { Button, Paper } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import { Login } from './Login';
 
 export default function Employee() {
+  const navigate = useNavigate()
     const paperStyle={padding:"50px 20px", width:400, margin:"20px auto"}
 
     const[name,setName]=React.useState('')
@@ -28,8 +31,9 @@ export default function Employee() {
     }
   return (
     <Container>
+      <h1>Laptop Management System</h1>
         <Paper elevation={3} style={paperStyle}>
-            <h1 style={{color:"blue"}}><u>Register form</u></h1>
+            <h1>Register form</h1>
     <Box
       component="form"
       sx={{
@@ -53,10 +57,13 @@ export default function Employee() {
         <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth value={password}
         onChange={(e)=>setPassword(e.target.value)}/>
         <br/>
-        <Button variant="contained" onClick={handleClick}>Register</Button>
+
+        <Button variant="contained" onClick={() => navigate('login')}>Register</Button>
+        <br/>
+        <Link to={'/login'} component={<Login/>} >Already have an account? Login</Link>
+
     </Box>
     </Paper>
     </Container>
-    
   );
 }
