@@ -25,8 +25,8 @@ function App() {
           <Route path='addlaptop' element={<AddLaptop/>} />
           <Route path='allocatelaptop' element={<AllocateLaptop/>} />
         </Route>
-        <Route index element={<Employee/>} />
-        <Route path='login' element={<Login/>} />
+        <Route path='register' element={<Employee/>} />
+        <Route index element={<Login/>} />
         
       </Routes>
     </div>

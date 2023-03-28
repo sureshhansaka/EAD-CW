@@ -60,7 +60,7 @@ export default function Employee() {
 
         <Button variant="contained" onClick={() => navigate('login')}>Register</Button>
         <br/>
-        <Link to={'/login'} component={<Login/>} >Already have an account? Login</Link>
+        <Link to={'/'} component={<Login/>} >Already have an account? Login</Link>
 
     </Box>
     </Paper>
