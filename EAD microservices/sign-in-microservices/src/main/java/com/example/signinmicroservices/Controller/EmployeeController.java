@@ -23,8 +23,13 @@ public class EmployeeController {
         return employeeService.createEmployee(employee);
     }
     @GetMapping(path = "/employees", params = {"username","password"})
-    public List<Employee> findEmployeeByUsernameAndPassword(@RequestParam String username, @RequestParam String password){
+    public boolean findEmployeeByUsernameAndPassword(@RequestParam String username, @RequestParam String password){
 
-        return employeeService.findEmployeeByUsernameAndPassword(username,password);
+        Employee employee =  employeeService.findEmployeeByUsernameAndPassword(username,password);
+       if(employee.getEid() != 0){
+           return true;
+       }
+       else
+           return false;
     }
 }
