@@ -5,7 +5,7 @@ import './App.css';
 import { AllocateLaptop } from './components/AllocateLaptop';
 import { CreateLaptop } from './components/CreateLaptop';
 import Employee from './components/Employee';
-import { LaptopList } from './components/LaptopList';
+import LaptopList  from './components/LaptopList.js';
 import { Login } from './components/Login';
 import Menu from './components/Menu';
 
@@ -25,8 +25,8 @@ function App() {
           <Route path='createlaptop' element={<CreateLaptop/>} />
           <Route path='allocatelaptop' element={<AllocateLaptop/>} />
         </Route>
-        <Route index element={<Employee/>} />
-        <Route path='login' element={<Login/>} />
+        <Route path='register' element={<Employee/>} />
+        <Route index element={<Login/>} />
         
       </Routes>
     </div>

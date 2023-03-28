@@ -36,7 +36,7 @@ export const Login = () => {
             <br/>
             <Button variant="contained" onClick={() => navigate('/laptoplist')}>Log In</Button>
             <br/>
-            <Link to={'/'} component={<Employee/>} >Don't have an account? Register</Link>
+            <Link to={'/register'} component={<Employee/>} >Don't have an account? Register</Link>
         </Box>
         </Paper>
         </Container>
