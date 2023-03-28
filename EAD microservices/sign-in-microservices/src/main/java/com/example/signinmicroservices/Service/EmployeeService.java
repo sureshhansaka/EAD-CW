@@ -20,7 +20,7 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public Employee findEmployeeByUsernameAndPassword(String username,String password){
+    public List<Employee> findEmployeeByUsernameAndPassword(String username,String password){
         return employeeRepository.findEmployeeByUsernameAndPassword(username,password);
     }
 
