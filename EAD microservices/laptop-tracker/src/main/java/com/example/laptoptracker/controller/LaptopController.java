@@ -44,9 +44,10 @@ public class LaptopController {
         return laptopService.updateLaptop(laptop);
     }
 
-    @DeleteMapping(path = "/laptops/{id}")
-    public void deleteLaptopById(@PathVariable int id){
-        laptopService.deleteLaptopById(id);
+    @DeleteMapping(path = "/laptops/{laptopCode}")
+    public void deleteLaptopById(@PathVariable String laptopCode){
+
+        laptopService.deleteLaptopById(laptopService.getLaptopByLapCode(laptopCode).getId());
     }
 
     @GetMapping(path = "/laptops/available", params = "labName")

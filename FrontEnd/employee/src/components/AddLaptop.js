@@ -39,7 +39,7 @@ export default function Login() {
   return (
     <Container>
         <Paper elevation={3} style={paperStyle}>
-            <h1 style={{color:"blue"}}><u>Add laptop</u></h1>
+            <h1 >Add Laptop</h1>
     <Box
       component="form"
       sx={{
