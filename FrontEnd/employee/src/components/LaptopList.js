@@ -1,42 +1,63 @@
-import { Paper } from '@mui/material'
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import DataTable from 'react-data-table-component'
-
+import { Paper } from '@mui/material';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import DataTable from 'react-data-table-component';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit'
 
 export default function LaptopList() {
     const column =[
         {
-            name:"id",
-            selector : row=> row.id
-        },
-        {
-            name:"laptopCode",
+            name:"Laptop Code",
             selector : row=>row.laptopCode
         },
         {
-            name:"brand",
+            name:"Brand",
             selector : row=>row.brand
         },
         {
-            name:"hddType",
+            name:"HDD Type",
             selector : row=>row.hddType
         },
         {
-            name:"totalSpace",
+            name:"Total Space",
             selector : row=>row.totalSpace
         },
         {
-            name:"ramSize",
+            name:"Ram Size",
             selector:row=>row.ramSize
         },
         {
-            name:"status",
-            selector:row=>row.status
+            name:"Status",
+            cell:(row) =>(
+                <label>{loadStatus(row.status)}</label>
+            ),
+            ignoreRowClick: true,
+              allowOverflow: true,
+              button: true,
         },
+        {
+            name:"Action",
+            cell: (row) => (
+                
+                <>                
+                <IconButton onClick={() => deleteLaptop(row.laptopCode)}>
+                  <DeleteIcon />
+                </IconButton>
+
+                <IconButton>
+                    <EditIcon/>
+                </IconButton>
+                </>
+
+              ),
+              ignoreRowClick: true,
+              allowOverflow: true,
+              button: true,
+        }
     ]
 
     useEffect(()=>{
@@ -48,11 +69,24 @@ export default function LaptopList() {
         fetData();
     },[])
 
+    const deleteLaptop = (laptopCode) => {
+        alert(`delete ${laptopCode}`);
+    }
+
+    const loadStatus = (status) => {
+        if(status == 1){
+            return 'Available';
+        }
+        else if(status == 0){
+            return 'Not Available';
+        }
+    }
+
     const [records,setRecords] = useState([])
   return (
     <div style={{padding:"50px 10%"}}>
         <Paper>
-            <h1>All Laptop</h1>
+            <h1>Laptops</h1>
 
             <div style={{display:'flex',justifyContent:'left'}}>
             <Tooltip title="Filter list">

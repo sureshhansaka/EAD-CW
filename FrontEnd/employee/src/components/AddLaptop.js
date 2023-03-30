@@ -7,12 +7,11 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import { Laptop } from '@mui/icons-material';
+
 
 export default function Login() {
     const paperStyle={padding:"30px 10px", width:500, margin:"20px auto"}
     const [labCode, setLabCode] = React.useState('');
-
     const[laptopCode,setLaptopCode]=React.useState('')
     const[brand,setBrand]=React.useState('')
     const[hddType,setHddType]=React.useState('')
@@ -29,12 +28,10 @@ export default function Login() {
         body:JSON.stringify(Laptop)
     }).then(()=>{
         console.log("New laptop added")
-    })
+        alert("Laptop Added Successfully")
+    }).catch(err => console.log(err));
        
     }
-
-
-
     const handleChange = (event) => {
         setLabCode(event.target.value);
       };
@@ -60,15 +57,15 @@ export default function Login() {
           label="Lab Name"
           onChange={handleChange}
         >
-          <MenuItem value={1}>PCLAB01</MenuItem>
-          <MenuItem value={2}>PCLAB02</MenuItem>
-          <MenuItem value={3}>PCLAB03</MenuItem>
-          <MenuItem value={4}>PCLAB04</MenuItem>
-          <MenuItem value={5}>PCLAB05</MenuItem>
-          <MenuItem value={6}>HALL-16A</MenuItem>
+          <MenuItem value={`PCLAB01`}>PCLAB01</MenuItem>
+          <MenuItem value={`PCLAB02`}>PCLAB02</MenuItem>
+          <MenuItem value={`PCLAB03`}>PCLAB03</MenuItem>
+          <MenuItem value={`PCLAB04`}>PCLAB04</MenuItem>
+          <MenuItem value={`PCLAB05`}>PCLAB05</MenuItem>
+          <MenuItem value={`HALL-16A`}>HALL-16A</MenuItem>
         </Select>
         </FormControl>
-        <TextField id="outlined-basic" label="Laptop Code" variant="outlined" fullWidth onChange={(e) => setLaptopCode(e.target.value)}/>
+        <TextField id="outlined-basic" label="Laptop Code" variant="outlined" fullWidth onChange={(e) => setLaptopCode(`${labCode}-${e.target.value}`)}/>
         <br/>
         <TextField id="outlined-basic" label="Brand" variant="outlined" fullWidth value={brand} 
         onChange={(e)=>setBrand(e.target.value)}/>

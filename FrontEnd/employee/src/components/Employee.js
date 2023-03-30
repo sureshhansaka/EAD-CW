@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import { Container } from '@mui/system';
 import { Button, Paper } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { Login } from './Login';
 
 export default function Employee() {
@@ -25,8 +26,12 @@ export default function Employee() {
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify(Employee)
     }).then(()=>{
-        console.log("New Employee added")
+        console.log("New Employee added");
+      
     })
+    .catch((error) => {
+      console.error('Error adding employee:', error);
+    });
        
     }
   return (
@@ -58,7 +63,7 @@ export default function Employee() {
         onChange={(e)=>setPassword(e.target.value)}/>
         <br/>
 
-        <Button variant="contained" onClick={() => navigate('/')}>Register</Button>
+        <Button variant="contained" onClick={() => { navigate('/');}}>Register</Button>
         <br/>
         <Link to={'/'} component={<Login/>} >Already have an account? Login</Link>
 
