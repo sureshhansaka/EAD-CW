@@ -63,13 +63,13 @@ export default function Login() {
           autoComplete="off"
         >
           <FormControl fullWidth>
-            <InputLabel id="label">Lab Code</InputLabel>
+            <InputLabel id="label">Lab Name</InputLabel>
             <Select
               labelId="label"
               id="demo-simple-select"
               value={labCode}
               label="Lab Name"
-              onChange={handleChange}
+              onChange={(e) => {handleChange(e)}}
             >
               <MenuItem value={`PCLAB01`}>PCLAB01</MenuItem>
               <MenuItem value={`PCLAB02`}>PCLAB02</MenuItem>
@@ -79,6 +79,7 @@ export default function Login() {
               <MenuItem value={`HALL-16A`}>HALL-16A</MenuItem>
             </Select>
           </FormControl>
+
           <TextField id="outlined-basic" label="Laptop Code" variant="outlined" fullWidth 
             onChange={(e) => setLaptopCode(`${labCode}-${e.target.value}`)} />
           <br />

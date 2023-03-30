@@ -45,11 +45,11 @@ export default function LaptopList() {
 
                 <>
                     <IconButton onClick={() => deleteLaptop(row.laptopCode)}>
-                        <DeleteIcon color="RED"/>
+                        <DeleteIcon color="error"/>
                     </IconButton>
 
                     <IconButton>
-                        <EditIcon />
+                        <EditIcon color="primary"/>
                     </IconButton>
                 </>
 
