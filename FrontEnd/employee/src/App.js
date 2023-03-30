@@ -10,6 +10,7 @@ import Menu from './components/Menu';
 import AddLaptop from './components/AddLaptop'
 import { ReturnLaptop } from './components/ReturnLaptop';
 
+
 function App() {
   const MenuLayout = () => (
     <>
