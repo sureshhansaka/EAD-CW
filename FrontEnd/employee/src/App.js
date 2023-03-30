@@ -8,6 +8,7 @@ import LaptopList  from './components/LaptopList';
 import { Login } from './components/Login';
 import Menu from './components/Menu';
 import AddLaptop from './components/AddLaptop'
+import { ReturnLaptop } from './components/ReturnLaptop';
 
 function App() {
   const MenuLayout = () => (
@@ -24,6 +25,8 @@ function App() {
           <Route path='laptopList' element={<LaptopList/>} />
 
           <Route path='addlaptop' element={<AddLaptop/>} />
+
+          <Route path='returnlaptop' element={<ReturnLaptop/>} />
 
           <Route path='allocatelaptop' element={<AllocateLaptop/>} />
         </Route>

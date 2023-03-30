@@ -12,7 +12,6 @@ import DataTable from 'react-data-table-component'
 import FilterListIcon from '@mui/icons-material/FilterList';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import { DataGrid } from '@mui/x-data-grid';
 
 export const AllocateLaptop = () => {
   const[laptopno,setLaptopNo]=useState('')

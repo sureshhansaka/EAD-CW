@@ -3,14 +3,13 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListIcon from '@mui/icons-material/List';
 import CreateIcon from '@mui/icons-material/Create';
-import DeleteIcon from '@mui/icons-material/Delete';
+import AssignmentReturnIcon from '@mui/icons-material/AssignmentReturn';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,7 +24,7 @@ export default function TemporaryDrawer({state, setState, toggleDrawer}) {
       navigate('/addlaptop')
     }
     else if (index === 2) {
-      navigate('/laptoplist')
+      navigate('/returnlaptop')
     }
     else {
       navigate('/allocatelaptop')
@@ -40,7 +39,7 @@ export default function TemporaryDrawer({state, setState, toggleDrawer}) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Laptop List', 'Add Laptop', 'Delete Laptop', 'Allocate Laptop'].map((text, index) => (
+        {['Laptop List', 'Add Laptop', 'Return Laptop', 'Allocate Laptop'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => navigateTab(index)}>
             <ListItemIcon>
@@ -51,7 +50,7 @@ export default function TemporaryDrawer({state, setState, toggleDrawer}) {
                   case 1:
                     return <CreateIcon/>;
                   case 2:
-                    return <DeleteIcon/>;
+                    return <AssignmentReturnIcon/>;
                   case 3:
                     return <AssignmentIcon />;
                   default:
