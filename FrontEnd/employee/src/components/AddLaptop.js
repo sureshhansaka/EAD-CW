@@ -9,7 +9,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import DialogBox from './DialogBox';
 import { toast } from "react-toastify";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
   const paperStyle = { padding: "30px 10px", width: 500, margin: "20px auto" }
@@ -23,7 +24,7 @@ export default function Login() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (validate()){
+    if (validate()) {
       const Laptop = { laptopCode, brand, hddType, totalSpace, ramSize }
       console.log(Laptop)
       fetch("http://localhost:8080/laptops", {
@@ -40,24 +41,40 @@ export default function Login() {
   }
 
   const validate = () => {
+
     let result = true;
-    if (!laptopCode || !brand || !hddType || !totalSpace || !ramSize) {
+    if(labCode === "" ){
+      
       result = false;
-      toast.warning("All fields are required");
-      return result;
+      toast.warning("Please select a LAB")
+
     }
 
-    // Validate input format
+    if (!laptopCode || !brand || !hddType || !totalSpace || !ramSize) {
+      result = false;
+      toast.warning("All fields are required")
+
+    }
+
+    if(isNaN(totalSpace)){
+      result = false;
+      toast.warning("Total space must be a Number")
+    }
+
+    if(isNaN(ramSize)){
+      result = false;
+      toast.warning("Ram size must be a Number")
+    }
+
     if (totalSpace < 0) {
       result = false;
-      toast.warning("Total space must be a positive number");
-      return result;
+      toast.warning("Total space must be a positive number")
     }
 
     if (ramSize < 0) {
       result = false;
-      toast.warning("RAM size must be a positive number");
-      return result;
+      toast.warning("RAM size must be a positive number")
+
     }
 
     return result;
@@ -95,7 +112,7 @@ export default function Login() {
             <InputLabel id="label">Lab Name</InputLabel>
             <Select
               labelId="label"
-              id="demo-simple-select"
+              id="PCLABS"
               value={labCode}
               label="Lab Name"
               onChange={(e) => { handleChange(e) }}
@@ -118,10 +135,10 @@ export default function Login() {
           <TextField id="outlined-basic" label="HDD Type" variant="outlined" fullWidth value={hddType}
             onChange={(e) => setHddType(e.target.value)} required />
           <br />
-          <TextField id="outlined-basic" label="Total Space" variant="outlined" fullWidth value={totalSpace}
+          <TextField id="outlined-basic" label="Total Space (GB)" variant="outlined" fullWidth value={totalSpace}
             onChange={(e) => setTotalSpace(e.target.value)} required />
           <br />
-          <TextField id="outlined-basic" label="Ram Size" variant="outlined" fullWidth value={ramSize}
+          <TextField id="outlined-basic" label="Ram Size (GB)" variant="outlined" fullWidth value={ramSize}
             onChange={(e) => setRamSize(e.target.value)} required />
           <br />
           <Button variant="contained" onClick={handleClick}>ADD</Button>
@@ -134,6 +151,8 @@ export default function Login() {
         handleClose={handleDialogClose}
         message="Laptop Added Successfully"
       />
+
+      <ToastContainer />
     </>
 
   );
