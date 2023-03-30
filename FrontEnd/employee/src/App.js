@@ -9,6 +9,7 @@ import { Login } from './components/Login';
 import Menu from './components/Menu';
 import AddLaptop from './components/AddLaptop'
 
+
 function App() {
   const MenuLayout = () => (
     <>
