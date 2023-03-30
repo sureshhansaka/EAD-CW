@@ -86,6 +86,7 @@ export default function LaptopList() {
         
     }
 
+    
     const loadStatus = (status) => {
         if (status === 1) {
             return 'Available';
