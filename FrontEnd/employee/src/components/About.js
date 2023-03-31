@@ -7,12 +7,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function About() {
-    const paperStyle = { padding: "10px 10px", width: 300, margin: "20px 30px",height:"275px" , display: "inline-block", verticalAlign: "top", textAlign: "center" ,borderRadius:"20px" }
+  const paperStyle = { padding: "40px 40px", width: 300, margin: "20px 20px", display: "inline-block", textAlign: "center" ,borderRadius:"10px" }
 
   return (
-    <><Container>
+    <Container>
+      <h1>About Us</h1>
+      
       <Paper elevation={3} style={paperStyle}>
-        <h1 >Shahein</h1>
+        <h2>Shahein</h2>
         <Box
           component="form"
           sx={{
@@ -26,7 +28,7 @@ export default function About() {
       </Paper>
 
       <Paper elevation={3} style={paperStyle}>
-        <h1 >Suresh</h1>
+        <h2 >Suresh</h2>
         <Box
           component="form"
           sx={{
@@ -35,12 +37,12 @@ export default function About() {
           noValidate
           autoComplete="off"
         >
-          <List>hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan </List>
+          <List>hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan</List>
         </Box>
       </Paper>
 
       <Paper elevation={3} style={paperStyle}>
-        <h1 >Siluni</h1>
+        <h2 >Siluni</h2>
         <Box
           component="form"
           sx={{
@@ -49,12 +51,12 @@ export default function About() {
           noValidate
           autoComplete="off"
         >
-          <List>hello mawa kapan</List>
+          <List>hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan</List>
         </Box>
       </Paper>
 
       <Paper elevation={3} style={paperStyle}>
-        <h1>Sheshami</h1>
+        <h2>Sheshami</h2>
         <Box
           component="form"
           sx={{
@@ -63,12 +65,12 @@ export default function About() {
           noValidate
           autoComplete="off"
         >
-          <List>hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan </List>
+          <List>hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan</List>
         </Box>
       </Paper>
 
       <Paper elevation={3} style={paperStyle}>
-        <h1 >Dewmi</h1>
+        <h2>Dewmi</h2>
         <Box
           component="form"
           sx={{
@@ -77,13 +79,12 @@ export default function About() {
           noValidate
           autoComplete="off"
         >
-          <List>hello mawa kapan</List>
+          <List>hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan</List>
         </Box>
       </Paper>
-    </Container>
 
       <ToastContainer />
-    </>
+    </Container>
 
   );
 }

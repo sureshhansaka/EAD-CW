@@ -24,7 +24,7 @@ const theme = createTheme({
   },
 });
 
-function App({}) {
+function App() {
   const MenuLayout = () => (
     <>
       <Menu />
@@ -32,30 +32,25 @@ function App({}) {
     </>
   );
 
-
-  
-  return (
+  return ( 
     <ThemeProvider theme={theme}>
       <div className="App">
         <Routes>
           <Route element={<MenuLayout/>}>
             <Route path='laptopList' element={<LaptopList/>} />
-
             <Route path='addlaptop' element={<AddLaptop/>} />
-
             <Route path='returnlaptop' element={<ReturnLaptop/>} />
-
-          <Route path='allocatelaptop' element={<AllocateLaptop/>} />
-          <Route path = 'updateLaptop' element= {<UpdateLaptop/>}/>
-          <Route path='about' element={<About/>}/>
-        </Route>
-        <Route path='register' element={<Employee/>} />
-        <Route index element={<Login/>} />
+            <Route path='allocatelaptop' element={<AllocateLaptop/>} />
+            <Route path = 'updateLaptop' element= {<UpdateLaptop/>}/>
+            <Route path='about' element={<About/>}/>
+          </Route>
         
-      </Routes> 
-    </div>
-      <ThemeProvider />
-  );
+          <Route path='register' element={<Employee/>} />
+          <Route index element={<Login/>} />
+        </Routes> 
+      </div>
+      </ThemeProvider>
+  )
 }
 
 export default App;

@@ -11,6 +11,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import AssignmentReturnIcon from '@mui/icons-material/AssignmentReturn';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { useNavigate } from 'react-router-dom';
+import InfoIcon from '@mui/icons-material/Info';
 
 export default function TemporaryDrawer({state, setState, toggleDrawer}) {
   const navigate = useNavigate()
@@ -46,7 +47,7 @@ export default function TemporaryDrawer({state, setState, toggleDrawer}) {
             <ListItemButton onClick={() => navigateTab(index)}>
             <ListItemIcon>
               {(() => {
-                switch (index % 4) {
+                switch (index % 5) {
                   case 0:
                     return <ListIcon color="primary"/>;
                   case 1:
@@ -55,6 +56,8 @@ export default function TemporaryDrawer({state, setState, toggleDrawer}) {
                     return <AssignmentReturnIcon color="primary"/>;
                   case 3:
                     return <AssignmentIcon color="primary"/>;
+                  case 4:
+                    return <InfoIcon color="primary"/>;
                   default:
                     return null;
                 }
