@@ -9,10 +9,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import { Login } from './Login';
+import Grid from '@mui/material/Grid';
 
 export default function Employee() {
   const navigate = useNavigate()
-  const paperStyle = { padding: "50px 20px", width: 400, margin: "20px auto" }
+  const paperStyle = { padding: "50px 50px", width: 400, margin: "80px auto", borderRadius: "10px" }
   const [name, setName] = React.useState('')
   const [telephone, setTelephone] = React.useState('')
   const [email, setEmail] = React.useState('')
@@ -42,7 +43,8 @@ export default function Employee() {
         if(registerRes.data){
           toast.success('Registration successful');
           navigate('/');
-        }else{  
+        }
+        else{  
           toast.error('Registration failed');
         }
       } catch (err) {
@@ -50,24 +52,21 @@ export default function Employee() {
       }
     };
   }
-    const validate = () => {
 
+    const validate = () => {
       let result = true;
       var phoneno = /^\d{10}$/;
       var emailValid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-
       if (!name || !telephone || !email || !username || !password) {
         result = false;
         toast.warning("All fields are required")
-
       }
 
       if (!telephone.match(phoneno)) {
         result = false;
         toast.warning("Telephone not in correct format eg: 0771234567")
       }
-
 
       if (!email.match(emailValid)) {
         result = false;
@@ -79,49 +78,53 @@ export default function Employee() {
         toast.warning("Password mismatch")
       }
 
-
       return result;
     }
+
     return (
-      <Container>
-        <h1>Laptop Management System</h1>
-        <Paper elevation={3} style={paperStyle}>
-          <h1>Register form</h1>
-          <Box
-            component="form"
-            sx={{
-              '& > :not(style)': { m: 1 },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth value={name}
-              onChange={(e) => setName(e.target.value)} />
-            <br />
-            <TextField id="outlined-basic" label="Telephone" variant="outlined" fullWidth value={telephone}
-              onChange={(e) => setTelephone(e.target.value)} />
-            <br />
-            <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth value={email}
-              onChange={(e) => setEmail(e.target.value)} />
-            <br />
-            <TextField id="outlined-basic" label="Username" variant="outlined" fullWidth value={username}
-              onChange={(e) => setUsername(e.target.value)} />
-            <br />
-            <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth value={password}
-              onChange={(e) => setPassword(e.target.value)} type="password" />
-            <br />
-            <TextField id="outlined-basic" label="Confirm Password" variant="outlined" fullWidth value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)} type="password" />
-            <br />
+      <Grid container>
+        <Grid item xs={7} className='bg'>
+          </Grid>
 
-            <Button variant="contained" onClick={(e) => { handleClick(e) }}>Register</Button>
-            <br />
-            <Link to={'/'} component={<Login />} >Already have an account? Login</Link>
+        <Grid item xs={5}>
+          <h1>Laptop Management System</h1>
+          <Paper elevation={3} style={paperStyle}>
+            <h2>Register</h2>
+            <Box
+              component="form"
+              sx={{
+                '& > :not(style)': { m: 1 },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth value={name}
+                onChange={(e) => setName(e.target.value)} />
+              <br />
+              <TextField id="outlined-basic" label="Telephone" variant="outlined" fullWidth value={telephone}
+                onChange={(e) => setTelephone(e.target.value)} />
+              <br />
+              <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth value={email}
+                onChange={(e) => setEmail(e.target.value)} />
+              <br />
+              <TextField id="outlined-basic" label="Username" variant="outlined" fullWidth value={username}
+                onChange={(e) => setUsername(e.target.value)} />
+              <br />
+              <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth value={password}
+                onChange={(e) => setPassword(e.target.value)} type="password" />
+              <br />
+              <TextField id="outlined-basic" label="Confirm Password" variant="outlined" fullWidth value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)} type="password" />
+              <br />
 
-          </Box>
-        </Paper>
+              <Button variant="contained" onClick={(e) => { handleClick(e) }}>Register</Button>
+              <br />
+              <Link to={'/'} component={<Login />} >Have an account? Login</Link>
+            </Box>
+          </Paper>
+        </Grid>
         <ToastContainer />
-      </Container>
+      </Grid>
     );
   
 }
