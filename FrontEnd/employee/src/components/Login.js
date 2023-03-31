@@ -11,7 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export const Login = () => {
+export const Login = ({ setAuthenticated }) => {
 
     const paperStyle = { padding: "50px 20px", width: 400, margin: "20px auto" }
 
@@ -27,6 +27,7 @@ export const Login = () => {
             .then(res => {
               setLoginStatus(res.data);
               if (loginStatus) {
+                setAuthenticated(true);
                 navigate('/laptopList');
               } else {
                 toast.error("Username or Password Incorrect");

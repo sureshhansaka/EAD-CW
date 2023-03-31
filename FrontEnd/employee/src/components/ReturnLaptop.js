@@ -6,9 +6,7 @@ import DialogBox from './DialogBox';
 
 export const ReturnLaptop = () => {
     const [dialogOpen, setDialogOpen] = React.useState(false);
-    const [returnedDateTime, setReturnedDateTime] = React.useState(new Date().toISOString().replace('T', ' ').slice(0, 19))
-    const [status, setStatus] = React.useState(1);
-    const [laptopCode, setLaptopCode] = React.useState('');
+    const [returnedDateTime] = React.useState(new Date().toISOString().replace('T', ' ').slice(0, 19))
     const returnLaptop = (laptopCode, issuedDateTime) => {
 
         if (window.confirm("Are you sure you want to return the Laptop ?")) {
@@ -21,6 +19,8 @@ export const ReturnLaptop = () => {
             }).then(() => {
                 console.log("Laptop returned");
                 setDialogOpen(true);
+                setRecords(records.filter(record => record.laptopCode !== laptopCode));
+                changeLaptopStatus(laptopCode);
             }).catch(err => console.log(err));
         }
     }
@@ -42,7 +42,7 @@ export const ReturnLaptop = () => {
         {
             name: "Action",
             cell: (row) => (
-                <Button onClick={(e)=>{returnLaptop(row.laptopCode, row.issuedDateTime); changeLaptopStatus(row.laptopCode);}}>Return</Button>
+                <Button onClick={(e)=>{returnLaptop(row.laptopCode, row.issuedDateTime); }}>Return</Button>
 
             ),
             ignoreRowClick: true,
@@ -74,7 +74,7 @@ export const ReturnLaptop = () => {
           headers: {"Content-Type": "application/json"},
         }).then(()=> {
           console.log("Laptop status changed");
-          setRecords(records.filter(record => record.laptopCode !== laptopCode));
+          
         }).catch(err => console.log(err));
       };
 

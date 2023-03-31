@@ -8,8 +8,6 @@ import { toast } from "react-toastify";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
-
-
 import { Login } from './Login';
 
 export default function Employee() {
