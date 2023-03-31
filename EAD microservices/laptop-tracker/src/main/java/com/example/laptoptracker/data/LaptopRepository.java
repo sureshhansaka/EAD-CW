@@ -19,6 +19,6 @@ public interface LaptopRepository extends JpaRepository<Laptop,Integer> {
     @Query("Select l from Laptop l where l.laptopCode = ?1")
     Laptop findLaptopByLapCode(String lapCode);
 
-    @Query("UPDATE Laptop l SET l.status = ?1  WHERE l.laptopCode = ?2 AND l.status = 1 ")
+    @Query("UPDATE Laptop l SET l.status = ?1  WHERE l.laptopCode = ?2 ")
     Laptop updateLaptopStatusByLapCode( int status , String laptopCode);
 }

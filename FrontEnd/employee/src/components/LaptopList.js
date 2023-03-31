@@ -6,7 +6,9 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit'
+import EditIcon from '@mui/icons-material/Edit';
+import UpdateLaptop from './UpdateLaptop';
+
 
 export default function LaptopList() {
     const column = [
@@ -48,7 +50,7 @@ export default function LaptopList() {
                         <DeleteIcon color="error"/>
                     </IconButton>
 
-                    <IconButton>
+                    <IconButton onClick={() => updateLaptop(row.laptopCode)} >
                         <EditIcon color="primary"/>
                     </IconButton>
                 </>
@@ -69,6 +71,8 @@ export default function LaptopList() {
         fetData();
     }, [])
 
+    const [laptopCode,setLaptopCode] = React.useState("");
+
     const deleteLaptop = (laptopCode) => {
         //e.preventDefault()
         if (window.confirm(`Are you sure you want to delete ${laptopCode}`) === true) {
@@ -84,6 +88,13 @@ export default function LaptopList() {
             }).catch(err => console.log(err));
         }
         
+    }
+
+    const [showUpdateComponent, setShowUpdateComponent] = useState(false);
+
+    const updateLaptop = (laptopCode)=> {
+        setLaptopCode(laptopCode);
+        setShowUpdateComponent(prevState => !prevState);
     }
 
     
@@ -117,7 +128,11 @@ export default function LaptopList() {
                     pagination
                 >
                 </DataTable>
+
             </Paper>
+
+                {showUpdateComponent && <UpdateLaptop laptopCode = {laptopCode}/>}
+            
         </div>
     )
 }
