@@ -7,14 +7,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function About() {
-  const paperStyle = { padding: "40px 30px", width: 300, margin: "20px 20px", height:180, display: "inline-block", textAlign: "center" ,borderRadius:"10px" }
+  const paperStyle = { padding: "40px 30px", width: 300, margin: "20px 20px", height:"180px", textAlign: "center", borderRadius:"10px", display: "inline-block"}
 
   return (
     <Container>
       <h1>About Us</h1>
       
       <Paper elevation={3} style={paperStyle}>
-        <h2>S.N.OCKERSZ</h2>
+        <h2>S.N. OCKERSZ</h2>
         <h3>COHDSE22.2F-27</h3>
         <Box
           component="form"
@@ -29,7 +29,7 @@ export default function About() {
       </Paper>
 
       <Paper elevation={3} style={paperStyle}>
-        <h2>K.G.D.S.HANSAKA</h2>
+        <h2>K.G.D.S. HANSAKA</h2>
         <h3>COHDSE22.2F-13</h3>
         <Box
           component="form"
@@ -44,7 +44,7 @@ export default function About() {
       </Paper>
 
       <Paper elevation={3} style={paperStyle}>
-        <h2>S.S.WIMALASIRI</h2>
+        <h2>S.S. WIMALASIRI</h2>
         <h3>COHDSE22.2F-24</h3>
         <Box
           component="form"
@@ -59,7 +59,7 @@ export default function About() {
       </Paper>
 
       <Paper elevation={3} style={paperStyle}>
-        <h2>W.M.T.D.UDANGAWE</h2>
+        <h2>W.M.T.D. UDANGAWE</h2>
         <h3>COHDSE22.2F-21</h3>
         <Box
           component="form"
@@ -74,7 +74,7 @@ export default function About() {
       </Paper>
 
       <Paper elevation={3} style={paperStyle}>
-        <h2>S.E.KOPERAHEWA</h2>
+        <h2>S.E. KOPERAHEWA</h2>
         <h3>COHDSE22.2F-11</h3>
         <Box
           component="form"
