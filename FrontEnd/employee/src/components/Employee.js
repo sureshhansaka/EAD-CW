@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Container } from '@mui/system';
 import { Button, Paper } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
@@ -119,7 +118,7 @@ export default function Employee() {
 
               <Button variant="contained" onClick={(e) => { handleClick(e) }}>Register</Button>
               <br />
-              <Link to={'/'} component={<Login />} >Have an account? Login</Link>
+              <Link to={'/'} component={<Login />} >Have an account? <u>Login</u></Link>
             </Box>
           </Paper>
         </Grid>

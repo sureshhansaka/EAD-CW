@@ -2,7 +2,6 @@ import React from 'react'
 import Employee from './Employee'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Container } from '@mui/system';
 import { Button, Paper } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
@@ -83,7 +82,7 @@ export const Login = ({ setAuthenticated }) => {
                         <br />
                         <Button variant="contained" onClick={(e) => { login(e) }}>Log In</Button>
                         <br />
-                        <Link to={'/register'} component={<Employee />} >New User? Register</Link>
+                        <Link to={'/register'} component={<Employee />} >New User? <u>Register</u></Link>
                     </Box>
                 </Paper>
           </Grid>
