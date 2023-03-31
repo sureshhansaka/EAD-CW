@@ -5,6 +5,7 @@ import { Container } from '@mui/system';
 import { Button, Paper } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import DialogBox from './DialogBox';
 
 
 export default function UpdateLaptop(props) {
@@ -15,11 +16,20 @@ export default function UpdateLaptop(props) {
     const [hddType, setHddType] = React.useState("");
     const [totalSpace, setTotalSpace] = React.useState("");
     const [ramSize, setRamSize] = React.useState("");
+    const [dialogOpen, setDialogOpen] = React.useState(false);
+
+    const handleDialogClose = () => {
+        setDialogOpen(false);
+        setBrand("");
+        setHddType("");
+        setTotalSpace("");
+        setRamSize("");
+    };
 
 
 
     React.useEffect(() => {
-        
+
         const fetData = async () => {
             axios.get(`http://localhost:8080/laptops?lapCode=${laptopCode}`)
                 .then(res => {
@@ -35,18 +45,21 @@ export default function UpdateLaptop(props) {
     }, [])
 
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const laptop = {laptopCode , brand , hddType, totalSpace, ramSize}
+        const laptop = { laptopCode, brand, hddType, totalSpace, ramSize }
         console.log(laptop)
-        fetch("http://localhost:8080/laptops",{
-          method: "PUT",
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify(laptop)
-        }).then(()=> {
-          console.log("Laptop changed");
+        fetch("http://localhost:8080/laptops", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(laptop)
+        }).then(() => {
+            console.log("Laptop changed");
+            setDialogOpen(true);
+            navigate('/laptopList');
+
         }).catch(err => console.log(err));
     };
 
@@ -77,9 +90,15 @@ export default function UpdateLaptop(props) {
                     <TextField id="outlined-basic" label="Ram Size" variant="outlined" fullWidth value={ramSize}
                         onChange={(e) => setRamSize(e.target.value)} />
                     <br />
-                    <Button variant="contained" onClick={(e) => {handleSubmit(e)}}>UPDATE</Button>
+                    <Button variant="contained" onClick={(e) => { handleSubmit(e) }}>UPDATE</Button>
                 </Box>
             </Paper>
+
+            <DialogBox
+                open={dialogOpen}
+                handleClose={handleDialogClose}
+                message="Laptop Updated Successfully"
+            />
         </Container>
 
     );

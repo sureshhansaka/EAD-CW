@@ -33,4 +33,9 @@ public class EmployeeController {
             return false;
         }
     }
+
+    @GetMapping(path = "/employees", params = "username")
+    public Employee checkUsernameExist(@RequestParam String username){
+        return employeeService.checkUsernameExist(username);
+    }
 }

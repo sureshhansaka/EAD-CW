@@ -11,6 +11,7 @@ import InputLabel from '@mui/material/InputLabel';
 import DialogBox from './DialogBox';
 
 import FormControl from '@mui/material/FormControl';
+import { ToastContainer, toast } from 'react-toastify';
 
 export const AllocateLaptop = () => {
   const [laptopCode, setLaptopCode] = useState('')
@@ -85,31 +86,31 @@ export const AllocateLaptop = () => {
   };
 
   const allocateLaptop = (event) => {
+
     event.preventDefault()
-    const allocate = { laptopCode, issuedTo }
-    console.log(allocate)
-    fetch("http://localhost:8082/allocations", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(allocate)
+    if (validate()) {
+      const allocate = { laptopCode, issuedTo }
+      console.log(allocate)
+      fetch("http://localhost:8082/allocations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(allocate)
 
-    }).then(() => {
-      console.log("Laptop allocated")
-      setDialogOpen(true);
+      }).then(() => {
+        console.log("Laptop allocated")
+        setDialogOpen(true);
+        changeLaptopStatus(event);
 
-    }).catch(err => console.log(err));
-
+      }).catch(err => console.log(err));
+    }
   };
 
   const changeLaptopStatus = (event) => {
     event.preventDefault()
-    const laptop = {laptopCode, status}
-    console.log(laptop)
-    fetch("http://localhost:8080/laptops",{
+    fetch(`http://localhost:8080/laptops/${laptopCode}`, {
       method: "PUT",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(laptop)
-    }).then(()=> {
+      headers: { "Content-Type": "application/json" },
+    }).then(() => {
       console.log("Laptop status changed");
       setRecords(records.filter(record => record.laptopCode !== laptopCode));
     }).catch(err => console.log(err));
@@ -120,6 +121,14 @@ export const AllocateLaptop = () => {
     setLaptopCode("");
     setIssuedTo("");
 
+  };
+
+  const validate = () => {
+    if (!laptopCode || !issuedTo) {
+      toast.warning("Please fill all the fields");
+      return false;
+    }
+    return true;
   };
 
   return (
@@ -170,16 +179,18 @@ export const AllocateLaptop = () => {
           onChange={(e) => setIssuedTo(e.target.value)} required />
         <br />
 
-        <Button variant="contained" onClick={(e) =>{allocateLaptop(e); changeLaptopStatus(e); }}>Allocate Laptop</Button>
+        <Button variant="contained" onClick={(e) => { allocateLaptop(e);  }}>Allocate Laptop</Button>
 
       </Box>
 
 
       <DialogBox
         open={dialogOpen}
-        handleClose={() => {handleDialogClose()}}
+        handleClose={() => { handleDialogClose() }}
         message="Laptop Allocated Successfully"
       />
+
+      <ToastContainer/>
 
     </div>
 

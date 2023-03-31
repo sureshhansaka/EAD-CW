@@ -21,6 +21,7 @@ export const Login = () => {
     const navigate = useNavigate('/register')
 
     const login = () => {
+     if( validate()){
         try {
           axios.get(`http://localhost:8083/employees?username=${username}&password=${password}`)
             .then(res => {
@@ -34,9 +35,22 @@ export const Login = () => {
             .catch(err => console.log(err));
         } catch (err) {
           console.log(err);
+          toast.error("Error logging in please try again");
         }
       }
+    }
       
+      const validate = () => {
+
+        let result = true;
+        if(!username || !password){
+          
+          result = false;
+          toast.warning("Please enter Username and Password");
+    
+        }
+        return result;
+      }
 
     React.useEffect(() => {
         if (loginStatus) {

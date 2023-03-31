@@ -68,12 +68,10 @@ export const ReturnLaptop = () => {
       };
     
       const changeLaptopStatus = (laptopCode) => {
-        const laptop = {laptopCode, status}
-        console.log(laptop)
-        fetch("http://localhost:8080/laptops",{
+        
+        fetch(`http://localhost:8080/laptops/${laptopCode}`,{
           method: "PUT",
           headers: {"Content-Type": "application/json"},
-          body: JSON.stringify(laptop)
         }).then(()=> {
           console.log("Laptop status changed");
           setRecords(records.filter(record => record.laptopCode !== laptopCode));

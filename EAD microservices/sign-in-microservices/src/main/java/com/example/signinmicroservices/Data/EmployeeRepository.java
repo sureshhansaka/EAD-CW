@@ -10,4 +10,7 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
     @Query("select e from Employee e where e.username=?1 and e.password=?2")
     Employee findEmployeeByUsernameAndPassword(String username,String password);
+
+    @Query("select e from Employee  e where e.username =?1")
+    Employee checkUsernameExist(String username);
 }

@@ -24,4 +24,8 @@ public class EmployeeService {
         return employeeRepository.findEmployeeByUsernameAndPassword(username,password);
     }
 
+    public Employee checkUsernameExist(String username){
+        return employeeRepository.checkUsernameExist(username);
+    }
+
 }
