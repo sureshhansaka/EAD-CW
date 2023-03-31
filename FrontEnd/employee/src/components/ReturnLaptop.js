@@ -6,9 +6,7 @@ import DialogBox from './DialogBox';
 
 export const ReturnLaptop = () => {
     const [dialogOpen, setDialogOpen] = React.useState(false);
-    const [returnedDateTime, setReturnedDateTime] = React.useState(new Date().toISOString().replace('T', ' ').slice(0, 19))
-    const [status, setStatus] = React.useState(1);
-    const [laptopCode, setLaptopCode] = React.useState('');
+    const [returnedDateTime] = React.useState(new Date().toISOString().replace('T', ' ').slice(0, 19))
     const returnLaptop = (laptopCode, issuedDateTime) => {
 
         if (window.confirm("Are you sure you want to return the Laptop ?")) {

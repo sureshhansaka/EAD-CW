@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Container } from '@mui/system';
 import { Button, Paper } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DialogBox from './DialogBox';
 
@@ -42,7 +42,7 @@ export default function UpdateLaptop(props) {
                 .catch(err => console.log(err));
         }
         fetData();
-    }, [])
+    }, [laptopCode])
 
 
     const navigate = useNavigate();

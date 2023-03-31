@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import DataTable from 'react-data-table-component'
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -16,11 +15,8 @@ import { ToastContainer, toast } from 'react-toastify';
 export const AllocateLaptop = () => {
   const [laptopCode, setLaptopCode] = useState('')
   const [issuedTo, setIssuedTo] = useState('')
-  const [value, setValue] = useState(null)
   const [labCode, setLabCode] = React.useState('');
-  const navigate = useNavigate();
   const [dialogOpen, setDialogOpen] = React.useState(false);
-  const [status, setStatus] = useState(0)
 
   const column = [
 
