@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react';
-import { Routes, Route, Outlet, Router } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import './App.css';
 import { AllocateLaptop } from './components/AllocateLaptop';
 import Employee from './components/Employee';
