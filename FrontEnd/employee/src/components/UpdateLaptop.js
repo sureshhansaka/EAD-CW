@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Container } from '@mui/system';
 import { Button, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -9,7 +8,7 @@ import DialogBox from './DialogBox';
 
 
 export default function UpdateLaptop(props) {
-    const paperStyle = { padding: "30px 10px", width: 500, margin: "20px auto" }
+    const paperStyle = { padding: "50px 50px", width: 400, margin: "50px auto", borderRadius: "10px" }
 
     const { laptopCode } = props;
     const [brand, setBrand] = React.useState("");
@@ -25,8 +24,6 @@ export default function UpdateLaptop(props) {
         setTotalSpace("");
         setRamSize("");
     };
-
-
 
     React.useEffect(() => {
 
@@ -65,9 +62,9 @@ export default function UpdateLaptop(props) {
 
 
     return (
-        <Container>
+        <div>
             <Paper elevation={3} style={paperStyle}>
-                <h1 >Update laptop</h1>
+                <h2>Update laptop</h2>
                 <Box
                     component="form"
                     sx={{
@@ -92,14 +89,13 @@ export default function UpdateLaptop(props) {
                     <br />
                     <Button variant="contained" onClick={(e) => { handleSubmit(e) }}>UPDATE</Button>
                 </Box>
-            </Paper>
-
+                </Paper>
             <DialogBox
                 open={dialogOpen}
                 handleClose={handleDialogClose}
                 message="Laptop Updated Successfully"
             />
-        </Container>
+        </div>
 
     );
 }

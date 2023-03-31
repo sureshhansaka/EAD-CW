@@ -8,8 +8,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import TemporaryDrawer from './sidebar';
 
 export default function Menu() {
-  
-
   const [state, setState] = useState({
     left: false,
   });
@@ -36,7 +34,7 @@ export default function Menu() {
           >
           <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} textAlign={'left'}>
             Laptop Management System
           </Typography>
           
