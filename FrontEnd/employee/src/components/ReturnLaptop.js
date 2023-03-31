@@ -1,12 +1,15 @@
-import { Button } from '@mui/material';
+import { Button, Paper } from '@mui/material';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import DialogBox from './DialogBox';
 
 export const ReturnLaptop = () => {
+    const [records, setRecords] = useState([])
+    const paperStyle = { padding: "50px 50px", width: 1000, margin: "20px auto", display: "inline-block", borderRadius: "10px" }
     const [dialogOpen, setDialogOpen] = React.useState(false);
     const [returnedDateTime] = React.useState(new Date().toISOString().replace('T', ' ').slice(0, 19))
+
     const returnLaptop = (laptopCode, issuedDateTime) => {
 
         if (window.confirm("Are you sure you want to return the Laptop ?")) {
@@ -24,7 +27,6 @@ export const ReturnLaptop = () => {
     }
 
     const column = [
-
         {
             name: "Laptop Code",
             selector: row => row.laptopCode
@@ -47,7 +49,6 @@ export const ReturnLaptop = () => {
             allowOverflow: true,
             button: true,
         }
-
     ]
 
     useEffect(() => {
@@ -59,14 +60,11 @@ export const ReturnLaptop = () => {
         fetData();
     }, [])
 
-    const [records, setRecords] = useState([])
-
     const handleDialogClose = () => {
         setDialogOpen(false);
       };
     
-      const changeLaptopStatus = (laptopCode) => {
-        
+    const changeLaptopStatus = (laptopCode) => {
         fetch(`http://localhost:8080/laptops/${laptopCode}`,{
           method: "PUT",
           headers: {"Content-Type": "application/json"},
@@ -77,20 +75,21 @@ export const ReturnLaptop = () => {
       };
 
     return (
-        <div className='container'>
-            <h2>Return Laptop</h2>
+        <div>
+            <h1>Return Laptop</h1>
+            <Paper elevation={3} style={paperStyle}>
             <DataTable
                 columns={column}
                 data={records}
                 pagination
                 checkboxSelection>
             </DataTable>
-
             <DialogBox
         open={dialogOpen}
         handleClose={() => {handleDialogClose()}}
         message="Laptop Returned Successfully"
       />
+      </Paper>
         </div>
 
     )

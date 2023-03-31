@@ -9,12 +9,11 @@ import axios from 'axios'
 import { toast } from "react-toastify";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Grid from '@mui/material/Grid';
 
 
 export const Login = () => {
-
-    const paperStyle = { padding: "50px 20px", width: 400, margin: "20px auto" }
-
+    const paperStyle = { padding: "50px 50px", width: 400, margin: "80px auto", borderRadius: "10px", }
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [loginStatus, setLoginStatus] = React.useState('');
@@ -59,31 +58,35 @@ export const Login = () => {
     }, [loginStatus, navigate]);
 
     return (
-        <Container>
-            <h1>Laptop Management System</h1>
-            <Paper elevation={3} style={paperStyle}>
-                <h1>Log In</h1>
-                <Box
-                    component="form"
-                    sx={{
-                        '& > :not(style)': { m: 1 },
-                    }}
-                    noValidate
-                    autoComplete="off"
-                >
-                    <TextField id="outlined-basic" label="Username" variant="outlined" fullWidth value={username}
-                        onChange={ (e) => {setUsername(e.target.value)}} />
-                    <br />
-                    <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth value={password}
-                        onChange={(e) => setPassword(e.target.value)} type="password" />
-                    <br />
-                    <Button variant="contained" onClick={(e) => { login(e) }}>Log In</Button>
-                    <br />
-                    <Link to={'/register'} component={<Employee />} >Don't have an account? Register</Link>
-                </Box>
-            </Paper>
+        <Grid container>
+          <Grid item xs={7} className='bg'>
+          </Grid>
 
+          <Grid item xs={5}>
+            <h1>Laptop Management System</h1>
+                <Paper elevation={3} style={paperStyle}>
+                    <h2>Log In</h2>
+                    <Box
+                        component="form"
+                        sx={{
+                            '& > :not(style)': { m: 1 },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                    >
+                        <TextField id="outlined-basic" label="Username" variant="outlined" fullWidth value={username}
+                            onChange={ (e) => {setUsername(e.target.value)}} />
+                        <br />
+                        <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth value={password}
+                            onChange={(e) => setPassword(e.target.value)} type="password" />
+                        <br />
+                        <Button variant="contained" onClick={(e) => { login(e) }}>Log In</Button>
+                        <br />
+                        <Link to={'/register'} component={<Employee />} >New User? Register</Link>
+                    </Box>
+                </Paper>
+          </Grid>
             <ToastContainer />
-        </Container>
+        </Grid>
     )
 }

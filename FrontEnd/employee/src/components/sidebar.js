@@ -45,13 +45,13 @@ export default function TemporaryDrawer({state, setState, toggleDrawer}) {
               {(() => {
                 switch (index % 4) {
                   case 0:
-                    return <ListIcon/>;
+                    return <ListIcon color="primary"/>;
                   case 1:
-                    return <CreateIcon/>;
+                    return <CreateIcon color="primary"/>;
                   case 2:
-                    return <AssignmentReturnIcon/>;
+                    return <AssignmentReturnIcon color="primary"/>;
                   case 3:
-                    return <AssignmentIcon />;
+                    return <AssignmentIcon color="primary"/>;
                   default:
                     return null;
                 }

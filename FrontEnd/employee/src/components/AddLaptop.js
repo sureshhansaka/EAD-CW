@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 
 export default function Login() {
-  const paperStyle = { padding: "30px 10px", width: 500, margin: "20px auto" }
+  const paperStyle = { padding: "50px 50px", width: 400, margin: "50px auto", borderRadius: "10px" }
   const [labCode, setLabCode] = React.useState('');
   const [lapCode, setLapCode] = React.useState('')
   const [brand, setBrand] = React.useState('')
@@ -51,19 +51,16 @@ export default function Login() {
   }
 
   const validate = () => {
-
     let result = true;
     if (labCode === "") {
 
       result = false;
       toast.warning("Please select a LAB")
-
     }
 
     if (!lapCode || !brand || !hddType || !totalSpace || !ramSize) {
       result = false;
       toast.warning("All fields are required")
-
     }
 
     if (isNaN(totalSpace)) {
@@ -84,17 +81,14 @@ export default function Login() {
     if (ramSize < 0) {
       result = false;
       toast.warning("RAM size must be a positive number")
-
     }
 
     return result;
   }
 
-
   const handleChange = (event) => {
     setLabCode(event.target.value);
   };
-
 
   const handleDialogClose = () => {
     setDialogOpen(false);
@@ -108,8 +102,8 @@ export default function Login() {
 
   return (
     <><Container>
+      <h1 >Add Laptop</h1>
       <Paper elevation={3} style={paperStyle}>
-        <h1 >Add Laptop</h1>
         <Box
           component="form"
           sx={{

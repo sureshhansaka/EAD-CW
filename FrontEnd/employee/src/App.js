@@ -10,9 +10,20 @@ import Menu from './components/Menu';
 import AddLaptop from './components/AddLaptop'
 import { ReturnLaptop } from './components/ReturnLaptop';
 import UpdateLaptop from './components/UpdateLaptop'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#006064',
+    },
+    secondary: {
+      main: '#4ac2d7',
+    },
+  },
+});
 
-function App() {
+function App({}) {
   const MenuLayout = () => (
     <>
       <Menu />
@@ -21,24 +32,25 @@ function App() {
   );
 
   return (
-    <div className="App">
-      <Routes>
-        <Route element={<MenuLayout/>}>
-          <Route path='laptopList' element={<LaptopList/>} />
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <Routes>
+          <Route element={<MenuLayout/>}>
+            <Route path='laptopList' element={<LaptopList/>} />
 
-          <Route path='addlaptop' element={<AddLaptop/>} />
+            <Route path='addlaptop' element={<AddLaptop/>} />
 
-          <Route path='returnlaptop' element={<ReturnLaptop/>} />
+            <Route path='returnlaptop' element={<ReturnLaptop/>} />
 
-          <Route path='allocatelaptop' element={<AllocateLaptop/>} />
-          <Route path = 'updateLaptop' element= {<UpdateLaptop/>}/>
-        </Route>
-        <Route path='register' element={<Employee/>} />
-        <Route index element={<Login/>} />
-        
-      </Routes>
-    </div>
-
+            <Route path='allocatelaptop' element={<AllocateLaptop/>} />
+            <Route path = 'updateLaptop' element= {<UpdateLaptop/>}/>
+          </Route>
+          <Route path='register' element={<Employee/>} />
+          <Route index element={<Login/>} />
+          
+        </Routes>
+      </div>
+    </ThemeProvider>
   );
 }
 

@@ -1,16 +1,24 @@
-import { Paper } from '@mui/material';
+import { Container, Grid, Paper } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import UpdateLaptop from './UpdateLaptop';
-
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import LaptopIcon from '@mui/icons-material/Laptop';
 
 export default function LaptopList() {
+    const paperStyle = { padding: "50px 50px", width: 1000, margin: "20px auto", display: "inline-block", borderRadius: "10px" }
+    const [laptopCode,setLaptopCode] = React.useState("");
+    const [labCode, setLabCode] = React.useState('');
+    const [showUpdateComponent, setShowUpdateComponent] = useState(false);
+    const [records, setRecords] = useState([])
+    
     const column = [
         {
             name: "Laptop Code",
@@ -71,8 +79,6 @@ export default function LaptopList() {
         fetData();
     }, [])
 
-    const [laptopCode,setLaptopCode] = React.useState("");
-
     const deleteLaptop = (laptopCode) => {
         //e.preventDefault()
         if (window.confirm(`Are you sure you want to delete ${laptopCode}`) === true) {
@@ -90,14 +96,11 @@ export default function LaptopList() {
         
     }
 
-    const [showUpdateComponent, setShowUpdateComponent] = useState(false);
-
     const updateLaptop = (laptopCode)=> {
         setLaptopCode(laptopCode);
         setShowUpdateComponent(prevState => !prevState);
     }
 
-    
     const loadStatus = (status) => {
         if (status === 1) {
             return 'Available';
@@ -107,33 +110,58 @@ export default function LaptopList() {
         }
     }
 
-    const [records, setRecords] = useState([])
+    const filterLaptops = (event) => {
+    event.preventDefault();
+    try {
+      axios.get(`http://localhost:8080/laptops/available?labName=${event.target.value}`)
+        .then(res => setRecords(res.data))
+        .catch(err => console.log(err));
+
+    } catch (err) {
+      console.log(err);
+    }
+    setLabCode(event.target.value);
+  };
+
+  const selectLaptopCode = (row) => {
+    setLaptopCode(row.laptopCode);
+    setLabCode(row.labCode);
+  };
+
     return (
-        <div style={{ padding: "50px 10%" }}>
-            <Paper>
-                <h1>Laptops</h1>
+        <Container>
 
-                <div style={{ display: 'flex', justifyContent: 'left' }}>
-                    <Tooltip title="Filter list">
-                        <IconButton>
-                            <FilterListIcon>
-                            </FilterListIcon>
-                        </IconButton>
-                    </Tooltip>
-                </div>
 
+                <h1>Registered Laptops</h1>
+
+           
+            <Paper elevation={3} style={paperStyle}>
+                <FormControl fullWidth>
+                    <InputLabel id="label">Lab Code</InputLabel>
+                    <Select
+                        labelId="label"
+                        id="demo-simple-select"
+                        value={labCode}
+                        label="Lab Name"
+                        onChange={(e) => { filterLaptops(e) }}
+                    >
+                    <MenuItem value={`PCLAB01`}>PCLAB01</MenuItem>
+                    <MenuItem value={`PCLAB02`}>PCLAB02</MenuItem>
+                    <MenuItem value={`PCLAB03`}>PCLAB03</MenuItem>
+                    <MenuItem value={`PCLAB04`}>PCLAB04</MenuItem>
+                    <MenuItem value={`PCLAB05`}>PCLAB05</MenuItem>
+                    <MenuItem value={`HALL-16A`}>HALL-16A</MenuItem>
+                    </Select>
+                </FormControl>
                 <DataTable
                     columns={column}
                     data={records}
                     pagination
                 >
                 </DataTable>
-
             </Paper>
-
-                {showUpdateComponent && <UpdateLaptop laptopCode = {laptopCode}/>}
-            
-        </div>
+            {showUpdateComponent && <UpdateLaptop laptopCode = {laptopCode}/>}
+        </Container>
     )
 }
 
