@@ -10,6 +10,7 @@ import Menu from './components/Menu';
 import AddLaptop from './components/AddLaptop'
 import { ReturnLaptop } from './components/ReturnLaptop';
 import UpdateLaptop from './components/UpdateLaptop'
+import About from './components/About';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
 
           <Route path='allocatelaptop' element={<AllocateLaptop/>} />
           <Route path = 'updateLaptop' element= {<UpdateLaptop/>}/>
+          <Route path='about' element={<About/>}/>
         </Route>
         <Route path='register' element={<Employee/>} />
         <Route index element={<Login/>} />
