@@ -7,14 +7,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function About() {
-  const paperStyle = { padding: "40px 40px", width: 300, margin: "20px 20px", display: "inline-block", textAlign: "center" ,borderRadius:"10px" }
+  const paperStyle = { padding: "40px 30px", width: 300, margin: "20px 20px", height:180, display: "inline-block", textAlign: "center" ,borderRadius:"10px" }
 
   return (
     <Container>
       <h1>About Us</h1>
       
       <Paper elevation={3} style={paperStyle}>
-        <h2>Shahein</h2>
+        <h2>S.N.OCKERSZ</h2>
+        <h3>COHDSE22.2F-27</h3>
         <Box
           component="form"
           sx={{
@@ -23,12 +24,13 @@ export default function About() {
           noValidate
           autoComplete="off"
         >
-          <List>hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan </List>
+          <List>Worked on Laptop Tracker microservice and overlooked the overall work of the backend-side.</List>
         </Box>
       </Paper>
 
       <Paper elevation={3} style={paperStyle}>
-        <h2 >Suresh</h2>
+        <h2>K.G.D.S.HANSAKA</h2>
+        <h3>COHDSE22.2F-13</h3>
         <Box
           component="form"
           sx={{
@@ -37,12 +39,13 @@ export default function About() {
           noValidate
           autoComplete="off"
         >
-          <List>hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan</List>
+          <List>Worked on the UI using react js</List>
         </Box>
       </Paper>
 
       <Paper elevation={3} style={paperStyle}>
-        <h2 >Siluni</h2>
+        <h2>S.S.WIMALASIRI</h2>
+        <h3>COHDSE22.2F-24</h3>
         <Box
           component="form"
           sx={{
@@ -51,12 +54,13 @@ export default function About() {
           noValidate
           autoComplete="off"
         >
-          <List>hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan</List>
+          <List>Worked on the Laptop Issuance Microservice</List>
         </Box>
       </Paper>
 
       <Paper elevation={3} style={paperStyle}>
-        <h2>Sheshami</h2>
+        <h2>W.M.T.D.UDANGAWE</h2>
+        <h3>COHDSE22.2F-21</h3>
         <Box
           component="form"
           sx={{
@@ -65,12 +69,13 @@ export default function About() {
           noValidate
           autoComplete="off"
         >
-          <List>hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan</List>
+          <List>Worked on the Sign-In Microservice</List>
         </Box>
       </Paper>
 
       <Paper elevation={3} style={paperStyle}>
-        <h2>Dewmi</h2>
+        <h2>S.E.KOPERAHEWA</h2>
+        <h3>COHDSE22.2F-11</h3>
         <Box
           component="form"
           sx={{
@@ -79,7 +84,7 @@ export default function About() {
           noValidate
           autoComplete="off"
         >
-          <List>hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan hello mawa kapan</List>
+          <List>Worked on the UI using react js</List>
         </Box>
       </Paper>
 
