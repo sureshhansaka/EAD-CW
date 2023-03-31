@@ -6,106 +6,135 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit'
+import EditIcon from '@mui/icons-material/Edit';
+import UpdateLaptop from './UpdateLaptop';
+
 
 export default function LaptopList() {
-    const column =[
+    const column = [
         {
-            name:"Laptop Code",
-            selector : row=>row.laptopCode
+            name: "Laptop Code",
+            selector: row => row.laptopCode
         },
         {
-            name:"Brand",
-            selector : row=>row.brand
+            name: "Brand",
+            selector: row => row.brand
         },
         {
-            name:"HDD Type",
-            selector : row=>row.hddType
+            name: "HDD Type",
+            selector: row => row.hddType
         },
         {
-            name:"Total Space",
-            selector : row=>row.totalSpace
+            name: "Total Space",
+            selector: row => row.totalSpace
         },
         {
-            name:"Ram Size",
-            selector:row=>row.ramSize
+            name: "Ram Size",
+            selector: row => row.ramSize
         },
         {
-            name:"Status",
-            cell:(row) =>(
+            name: "Status",
+            cell: (row) => (
                 <label>{loadStatus(row.status)}</label>
             ),
             ignoreRowClick: true,
-              allowOverflow: true,
-              button: true,
+            allowOverflow: true,
+            button: true,
         },
         {
-            name:"Action",
+            name: "Action",
             cell: (row) => (
-                
-                <>                
-                <IconButton onClick={() => deleteLaptop(row.laptopCode)}>
-                  <DeleteIcon />
-                </IconButton>
 
-                <IconButton>
-                    <EditIcon/>
-                </IconButton>
+                <>
+                    <IconButton onClick={() => deleteLaptop(row.laptopCode)}>
+                        <DeleteIcon color="error"/>
+                    </IconButton>
+
+                    <IconButton onClick={() => updateLaptop(row.laptopCode)} >
+                        <EditIcon color="primary"/>
+                    </IconButton>
                 </>
 
-              ),
-              ignoreRowClick: true,
-              allowOverflow: true,
-              button: true,
+            ),
+            ignoreRowClick: true,
+            allowOverflow: true,
+            button: true,
         }
     ]
 
-    useEffect(()=>{
+    useEffect(() => {
         const fetData = async () => {
             axios.get('http://localhost:8080/laptops')
-            .then(res => setRecords(res.data))
-            .catch(err => console.log(err));
+                .then(res => setRecords(res.data))
+                .catch(err => console.log(err));
         }
         fetData();
-    },[])
+    }, [])
+
+    const [laptopCode,setLaptopCode] = React.useState("");
 
     const deleteLaptop = (laptopCode) => {
-        alert(`delete ${laptopCode}`);
+        //e.preventDefault()
+        if (window.confirm(`Are you sure you want to delete ${laptopCode}`) === true) {
+            fetch(`http://localhost:8080/laptops/${laptopCode}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+
+
+            }).then(() => {
+                console.log("Laptop Deleted")
+                alert("Laptop Deleted Successfully")
+                setRecords(records.filter(record => record.laptopCode !== laptopCode));
+            }).catch(err => console.log(err));
+        }
+        
     }
 
+    const [showUpdateComponent, setShowUpdateComponent] = useState(false);
+
+    const updateLaptop = (laptopCode)=> {
+        setLaptopCode(laptopCode);
+        setShowUpdateComponent(prevState => !prevState);
+    }
+
+    
     const loadStatus = (status) => {
-        if(status == 1){
+        if (status === 1) {
             return 'Available';
         }
-        else if(status == 0){
+        else if (status === 0) {
             return 'Not Available';
         }
     }
 
-    const [records,setRecords] = useState([])
-  return (
-    <div style={{padding:"50px 10%"}}>
-        <Paper>
-            <h1>Laptops</h1>
+    const [records, setRecords] = useState([])
+    return (
+        <div style={{ padding: "50px 10%" }}>
+            <Paper>
+                <h1>Laptops</h1>
 
-            <div style={{display:'flex',justifyContent:'left'}}>
-            <Tooltip title="Filter list">
-            <IconButton>
-            <FilterListIcon>
-          </FilterListIcon>
-            </IconButton>
-            </Tooltip>
-            </div>
+                <div style={{ display: 'flex', justifyContent: 'left' }}>
+                    <Tooltip title="Filter list">
+                        <IconButton>
+                            <FilterListIcon>
+                            </FilterListIcon>
+                        </IconButton>
+                    </Tooltip>
+                </div>
+
+                <DataTable
+                    columns={column}
+                    data={records}
+                    pagination
+                >
+                </DataTable>
+
+            </Paper>
+
+                {showUpdateComponent && <UpdateLaptop laptopCode = {laptopCode}/>}
             
-      <DataTable
-        columns={column}
-        data={records}
-        pagination
-        >
-      </DataTable>
-      </Paper>
-    </div>
-  )
+        </div>
+    )
 }
 
 

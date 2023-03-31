@@ -37,16 +37,14 @@ public class LaptopController {
     @PutMapping(path = "/laptops")
     public Laptop editLaptop(@RequestBody Laptop laptop){
         laptop.setId(laptopService.getLaptopByLapCode(laptop.getLaptopCode()).getId());
-        laptop.setBrand(laptopService.getLaptopByLapCode(laptop.getLaptopCode()).getBrand());
-        laptop.setHddType(laptopService.getLaptopByLapCode(laptop.getLaptopCode()).getHddType());
-        laptop.setTotalSpace(laptopService.getLaptopByLapCode(laptop.getLaptopCode()).getTotalSpace());
-        laptop.setRamSize(laptopService.getLaptopByLapCode(laptop.getLaptopCode()).getRamSize());
+        laptop.setStatus(laptopService.getLaptopByLapCode(laptop.getLaptopCode()).getStatus());
         return laptopService.updateLaptop(laptop);
     }
 
-    @DeleteMapping(path = "/laptops/{id}")
-    public void deleteLaptopById(@PathVariable int id){
-        laptopService.deleteLaptopById(id);
+    @DeleteMapping(path = "/laptops/{laptopCode}")
+    public void deleteLaptopById(@PathVariable String laptopCode){
+
+        laptopService.deleteLaptopById(laptopService.getLaptopByLapCode(laptopCode).getId());
     }
 
     @GetMapping(path = "/laptops/available", params = "labName")
@@ -64,8 +62,11 @@ public class LaptopController {
         return laptopService.getLaptopByLapCode(lapCode);
     }
 
-    @PutMapping(path = "/laptops" , params = "laptopCode")
-    public Laptop updateLaptopStatusByLapCode (String laptopCode, @RequestBody int status){
-        return laptopService.updateLaptopStatusByLapCode(laptopCode,status);
+    @PutMapping(path = "/laptops/{laptopCode}")
+    public Laptop updateLaptopStatusByLapCode (@PathVariable String laptopCode){
+        Laptop laptop = laptopService.getLaptopByLapCode(laptopCode);
+        laptop.setStatus((laptop.getStatus() == 0) ? 1 : 0);
+        return laptopService.updateLaptop(laptop);
     }
+
 }

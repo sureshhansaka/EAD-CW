@@ -24,11 +24,18 @@ public class EmployeeController {
     }
     @GetMapping(path = "/employees", params = {"username","password"})
     public boolean findEmployeeByUsernameAndPassword(@RequestParam String username, @RequestParam String password){
-        if(employeeService.findEmployeeByUsernameAndPassword(username,password).getEid() != 0)
-        {
-            return true;
-        }
-        else
+        try{
+            if (employeeService.findEmployeeByUsernameAndPassword(username, password).getEid() != 0) {
+                return true;
+            } else
+                return false;
+        }catch(Exception e){
             return false;
+        }
+    }
+
+    @GetMapping(path = "/employees", params = "username")
+    public Employee checkUsernameExist(@RequestParam String username){
+        return employeeService.checkUsernameExist(username);
     }
 }

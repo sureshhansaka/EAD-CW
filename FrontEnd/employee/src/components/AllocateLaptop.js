@@ -1,112 +1,200 @@
-import { Container } from '@mui/system'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { useNavigate } from 'react-router-dom';
 import DataTable from 'react-data-table-component'
-import FilterListIcon from '@mui/icons-material/FilterList';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import { DataGrid } from '@mui/x-data-grid';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import DialogBox from './DialogBox';
+
+import FormControl from '@mui/material/FormControl';
+import { ToastContainer, toast } from 'react-toastify';
 
 export const AllocateLaptop = () => {
-  const[laptopno,setLaptopNo]=useState('')
-  const[hallno,setHallNo]=useState('')
-  const[value,setValue]=useState(null)
+  const [laptopCode, setLaptopCode] = useState('')
+  const [issuedTo, setIssuedTo] = useState('')
+  const [value, setValue] = useState(null)
+  const [labCode, setLabCode] = React.useState('');
+  const navigate = useNavigate();
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [status, setStatus] = useState(0)
 
-  const navigate = useNavigate()
-
-  const column =[
+  const column = [
 
     {
-        name:"Laptop Code",
-        selector : row=>row.laptopCode
+      name: "Laptop Code",
+      selector: row => row.laptopCode
     },
     {
-        name:"Brand",
-        selector : row=>row.brand
+      name: "Brand",
+      selector: row => row.brand
     },
     {
-        name:"HDD Type",
-        selector : row=>row.hddType
+      name: "HDD Type",
+      selector: row => row.hddType
     },
     {
-        name:"Total Space",
-        selector : row=>row.totalSpace
+      name: "Total Space",
+      selector: row => row.totalSpace
     },
     {
-        name:"Ram Size",
-        selector:row=>row.ramSize
+      name: "Ram Size",
+      selector: row => row.ramSize
     },
-]
-  
-  useEffect(()=>{
+    {
+      name: "Action",
+      cell: (row) => (
+        <Button onClick={() => selectLaptopCode(row)}>Select</Button>
+      ),
+
+      ignoreRowClick: true,
+      allowOverflow: true,
+      button: true,
+    }
+  ]
+
+  useEffect(() => {
     const fetData = async () => {
-        axios.get('http://localhost:8080/laptops/available?labName=PCLAB01')
+      axios.get('http://localhost:8080/laptops/available?labName=')
         .then(res => setRecords(res.data))
         .catch(err => console.log(err));
     }
     fetData();
-  },[])
+  }, [])
 
-  const [records,setRecords] = useState([])
+  const [records, setRecords] = useState([])
+
+  const filterLaptops = (event) => {
+    event.preventDefault();
+    try {
+      axios.get(`http://localhost:8080/laptops/available?labName=${event.target.value}`)
+        .then(res => setRecords(res.data))
+        .catch(err => console.log(err));
+
+    } catch (err) {
+      console.log(err);
+    }
+    setLabCode(event.target.value);
+  };
+
+  const selectLaptopCode = (row) => {
+    setLaptopCode(row.laptopCode);
+    setLabCode(row.labCode);
+  };
+
+  const allocateLaptop = (event) => {
+
+    event.preventDefault()
+    if (validate()) {
+      const allocate = { laptopCode, issuedTo }
+      console.log(allocate)
+      fetch("http://localhost:8082/allocations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(allocate)
+
+      }).then(() => {
+        console.log("Laptop allocated")
+        setDialogOpen(true);
+        changeLaptopStatus(event);
+
+      }).catch(err => console.log(err));
+    }
+  };
+
+  const changeLaptopStatus = (event) => {
+    event.preventDefault()
+    fetch(`http://localhost:8080/laptops/${laptopCode}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+    }).then(() => {
+      console.log("Laptop status changed");
+      setRecords(records.filter(record => record.laptopCode !== laptopCode));
+    }).catch(err => console.log(err));
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+    setLaptopCode("");
+    setIssuedTo("");
+
+  };
+
+  const validate = () => {
+    if (!laptopCode || !issuedTo) {
+      toast.warning("Please fill all the fields");
+      return false;
+    }
+    return true;
+  };
 
   return (
+
     <div className='container'>
-        <h2>Allocate Laptop</h2>
-        
-        <div style={{display:'flex',justifyContent:'left'}}>
-            <Tooltip title="Filter list">
-            <IconButton>
-            <FilterListIcon>
-            </FilterListIcon>
-            </IconButton>
-            </Tooltip>
-            </div>
-            
+      <h1>Allocate Laptop</h1>
+      <FormControl fullWidth>
+
+        <InputLabel id="label">Lab Code</InputLabel>
+        <Select
+          labelId="label"
+          id="demo-simple-select"
+          value={labCode}
+          label="Lab Name"
+          onChange={(e) => { filterLaptops(e) }}
+        >
+          <MenuItem value={`PCLAB01`}>PCLAB01</MenuItem>
+          <MenuItem value={`PCLAB02`}>PCLAB02</MenuItem>
+          <MenuItem value={`PCLAB03`}>PCLAB03</MenuItem>
+          <MenuItem value={`PCLAB04`}>PCLAB04</MenuItem>
+          <MenuItem value={`PCLAB05`}>PCLAB05</MenuItem>
+          <MenuItem value={`HALL-16A`}>HALL-16A</MenuItem>
+        </Select>
+      </FormControl>
+
+
       <DataTable
         columns={column}
         data={records}
         pagination
         checkboxSelection
-        >
+      >
       </DataTable>
 
-        <Box
+      <Box
         component="form"
         sx={{
-            '& > :not(style)': { m: 1},
+          '& > :not(style)': { m: 1 },
         }}
         noValidate
         autoComplete="off"
-        >
-            <TextField id="outlined-basic" label="Laptop Code" variant="outlined" value={laptopno}
-            onChange={(e)=>setLaptopNo(e.target.value)} required/>
-            <br/>
-            <TextField id="outlined-basic" label="Hall Number" variant="outlined" value={hallno}
-            onChange={(e)=>setHallNo(e.target.value)} required/>
-            <br/>
-            
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker  
-              label="Allocated Date"
-              value={value}
-              onChange={(newValue)=>setValue(newValue)}
-              renderInput={(props) => <TextField {...props} required/> }
-              />
-            </LocalizationProvider>
-            <br/>
-            
-            <Button variant="contained" onClick={() => navigate('')}>Allocate Laptop</Button>
+      >
+        <h2>Allocation</h2>
+        <TextField id="outlined-basic" label="Laptop Code" variant="outlined" value={laptopCode}
+          onChange={(e) => setLaptopCode(e.target.value)} required />
+        <br />
+        <TextField id="outlined-basic" label="Hall Number" variant="outlined" value={issuedTo}
+          onChange={(e) => setIssuedTo(e.target.value)} required />
+        <br />
 
-        </Box>
+        <Button variant="contained" onClick={(e) => { allocateLaptop(e);  }}>Allocate Laptop</Button>
+
+      </Box>
+
+
+      <DialogBox
+        open={dialogOpen}
+        handleClose={() => { handleDialogClose() }}
+        message="Laptop Allocated Successfully"
+      />
+
+      <ToastContainer/>
+
     </div>
-    
+
+
   )
 }
 
