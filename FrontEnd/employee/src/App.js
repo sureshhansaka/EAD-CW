@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route, Outlet, Router } from 'react-router-dom';
 import './App.css';
 import { AllocateLaptop } from './components/AllocateLaptop';
 import Employee from './components/Employee';
@@ -20,9 +20,12 @@ function App() {
     </>
   );
 
+
+  
   return (
     <div className="App">
-      <Routes>
+      {
+       <Routes>
         <Route element={<MenuLayout/>}>
           <Route path='laptopList' element={<LaptopList/>} />
 
@@ -36,7 +39,11 @@ function App() {
         <Route path='register' element={<Employee/>} />
         <Route index element={<Login/>} />
         
-      </Routes>
+      </Routes> 
+        
+      
+      
+      }
     </div>
 
   );
