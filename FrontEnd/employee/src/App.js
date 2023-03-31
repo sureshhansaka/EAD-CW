@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Routes, Route, Outlet } from 'react-router-dom';
 import './App.css';
 import { AllocateLaptop } from './components/AllocateLaptop';
@@ -10,6 +10,7 @@ import Menu from './components/Menu';
 import AddLaptop from './components/AddLaptop'
 import { ReturnLaptop } from './components/ReturnLaptop';
 import UpdateLaptop from './components/UpdateLaptop'
+import About from './components/About';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -31,6 +32,8 @@ function App({}) {
     </>
   );
 
+
+  
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
@@ -42,15 +45,16 @@ function App({}) {
 
             <Route path='returnlaptop' element={<ReturnLaptop/>} />
 
-            <Route path='allocatelaptop' element={<AllocateLaptop/>} />
-            <Route path = 'updateLaptop' element= {<UpdateLaptop/>}/>
-          </Route>
-          <Route path='register' element={<Employee/>} />
-          <Route index element={<Login/>} />
-          
-        </Routes>
-      </div>
-    </ThemeProvider>
+          <Route path='allocatelaptop' element={<AllocateLaptop/>} />
+          <Route path = 'updateLaptop' element= {<UpdateLaptop/>}/>
+          <Route path='about' element={<About/>}/>
+        </Route>
+        <Route path='register' element={<Employee/>} />
+        <Route index element={<Login/>} />
+        
+      </Routes> 
+    </div>
+      <ThemeProvider />
   );
 }
 

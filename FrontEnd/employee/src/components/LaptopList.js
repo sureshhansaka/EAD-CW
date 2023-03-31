@@ -34,11 +34,11 @@ export default function LaptopList() {
         },
         {
             name: "Total Space",
-            selector: row => row.totalSpace
+            selector: row => row.totalSpace+" GB"
         },
         {
             name: "Ram Size",
-            selector: row => row.ramSize
+            selector: row => row.ramSize+" GB"
         },
         {
             name: "Status",

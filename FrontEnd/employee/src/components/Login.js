@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Grid from '@mui/material/Grid';
 
 
-export const Login = () => {
+export const Login = ({ setAuthenticated }) => {
     const paperStyle = { padding: "50px 50px", width: 400, margin: "80px auto", borderRadius: "10px", }
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -26,6 +26,7 @@ export const Login = () => {
             .then(res => {
               setLoginStatus(res.data);
               if (loginStatus) {
+                setAuthenticated(true);
                 navigate('/laptopList');
               } else {
                 toast.error("Username or Password Incorrect");

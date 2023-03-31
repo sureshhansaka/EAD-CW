@@ -22,6 +22,8 @@ export const ReturnLaptop = () => {
             }).then(() => {
                 console.log("Laptop returned");
                 setDialogOpen(true);
+                setRecords(records.filter(record => record.laptopCode !== laptopCode));
+                changeLaptopStatus(laptopCode);
             }).catch(err => console.log(err));
         }
     }
@@ -42,7 +44,7 @@ export const ReturnLaptop = () => {
         {
             name: "Action",
             cell: (row) => (
-                <Button onClick={(e)=>{returnLaptop(row.laptopCode, row.issuedDateTime); changeLaptopStatus(row.laptopCode);}}>Return</Button>
+                <Button onClick={(e)=>{returnLaptop(row.laptopCode, row.issuedDateTime); }}>Return</Button>
 
             ),
             ignoreRowClick: true,
@@ -70,7 +72,7 @@ export const ReturnLaptop = () => {
           headers: {"Content-Type": "application/json"},
         }).then(()=> {
           console.log("Laptop status changed");
-          setRecords(records.filter(record => record.laptopCode !== laptopCode));
+          
         }).catch(err => console.log(err));
       };
 

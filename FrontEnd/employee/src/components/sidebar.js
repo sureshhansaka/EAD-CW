@@ -25,8 +25,11 @@ export default function TemporaryDrawer({state, setState, toggleDrawer}) {
     else if (index === 2) {
       navigate('/returnlaptop')
     }
-    else {
+    else if(index === 3){
       navigate('/allocatelaptop')
+    }
+    else {
+      navigate('/about')
     }
   }
 
@@ -38,7 +41,7 @@ export default function TemporaryDrawer({state, setState, toggleDrawer}) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Laptop List', 'Add Laptop', 'Return Laptop', 'Allocate Laptop'].map((text, index) => (
+        {['Laptop List', 'Add Laptop', 'Return Laptop', 'Allocate Laptop','About Us'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => navigateTab(index)}>
             <ListItemIcon>
