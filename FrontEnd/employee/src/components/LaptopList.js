@@ -113,7 +113,7 @@ export default function LaptopList() {
     const filterLaptops = (event) => {
     event.preventDefault();
     try {
-      axios.get(`http://localhost:8080/laptops/available?labName=${event.target.value}`)
+      axios.get(`http://localhost:8080/laptops?labName=${event.target.value}`)
         .then(res => setRecords(res.data))
         .catch(err => console.log(err));
 
